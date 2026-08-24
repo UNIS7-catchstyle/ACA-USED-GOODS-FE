@@ -1,0 +1,171 @@
+.cs-button {
+	align-items: center;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	display: inline-flex;
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+	justify-content: center;
+	line-height: 22px;
+	padding: 10px 28px;
+	transition: none;
+}
+
+.cs-button:focus,
+.cs-button:focus-visible,
+.cs-button:hover {
+	border: none;
+	outline: none;
+}
+
+.cs-button--l {
+	height: 52px;
+	width: 335px;
+}
+
+.cs-button--m {
+	height: 48px;
+}
+
+.cs-button--s {
+	border-radius: 6.667px;
+	font-size: 14px;
+	font-weight: 700;
+	height: 40px;
+	letter-spacing: -0.28px;
+	line-height: 22.214px;
+	padding: 8.333px 23.333px;
+	width: 175.833px;
+}
+
+.cs-button--primary.cs-button--default {
+	background: #0b0e0f;
+	color: #ffffff;
+}
+
+.cs-button--primary.cs-button--inactive {
+	background: #babcbe;
+	color: #ffffff;
+}
+
+.cs-button--secondary.cs-button--default {
+	background: #eceef0;
+	color: #242628;
+}
+
+.cs-button--secondary.cs-button--inactive {
+	background: #eceef0;
+	color: #7f8285;
+}
+
+.cs-button--terms {
+	align-items: center;
+	background: #eceef0 !important;
+	border-radius: 8px;
+	gap: 10px;
+	height: 52px;
+	justify-content: flex-start;
+	padding: 10px 12px;
+	width: 335px;
+}
+
+.cs-button--terms .cs-button__label {
+	color: #0b0e0f;
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: 0;
+	line-height: 26px;
+}
+
+.cs-button--terms.cs-button--default .cs-button__label {
+	color: #0b0e0f !important;
+}
+
+.cs-button__check {
+	align-items: center;
+	border-radius: 50%;
+	box-sizing: border-box;
+	display: inline-flex;
+	flex-shrink: 0;
+	font-size: 13px;
+	font-weight: 700;
+	height: 21.1px;
+	justify-content: center;
+	margin-left: 0;
+	margin-right: 0;
+	width: 21.1px;
+}
+
+.cs-button--terms.cs-button--inactive .cs-button__check {
+	border: 1.5px solid #d3d5d7;
+	color: #d3d5d7;
+}
+
+.cs-button--terms.cs-button--inactive .cs-button__label {
+	color: #a1a3a5 !important;
+}
+
+.cs-button--terms.cs-button--inactive {
+	background: #f6f8fa !important;
+}
+
+.cs-button--terms.cs-button--default .cs-button__check {
+	background: var(--neutral-10, #0B0E0F);
+	color: #ffffff;
+}
+
+.cs-button__icon {
+	display: block;
+}
+
+.cs-button--round,
+.cs-button--opacity_icon {
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+.cs-button--round {
+	height: 32px;
+	width: 32px;
+}
+
+.cs-button--round .cs-button__icon {
+	height: 32px;
+	width: 32px;
+}
+
+.cs-button--opacity_icon {
+	height: 32px;
+	width: 32px;
+}
+
+.cs-button--opacity_icon .cs-button__icon {
+	height: 32px;
+	width: 32px;
+}
+
+.cs-button--opacity_text,
+.cs-button--round_text {
+	border-radius: 9999px;
+	font-size: 14px;
+	font-weight: 700;
+	height: 32px;
+	letter-spacing: -0.2px;
+	line-height: 20px;
+	min-width: 61px;
+	padding: 6px 14px;
+}
+
+.cs-button--opacity_text {
+	background: rgba(11, 14, 15, 0.3);
+	border: 0.5px solid #a1a3a5;
+	color: #ffffff;
+}
+
+.cs-button--round_text {
+	background: #0b0e0f;
+	color: #ffffff;
+}

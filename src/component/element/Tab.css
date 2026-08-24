@@ -1,0 +1,137 @@
+/* Base Tap */
+.cs-tap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Tap Label */
+.cs-tap__label {
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+}
+
+/* ==================== */
+/* Recent Searches Style */
+/* ==================== */
+
+.cs-tap--recent-searches {
+    padding: 4px 12px 4px 16px;
+    border-radius: 999px;
+    gap: 4px;
+    background: var(--neutral-95, #ECEEF0);
+}
+
+.cs-tap__label--recent-searches {
+    color: var(--neutral-10, #0B0E0F);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.2px;
+}
+
+.cs-tap__badge--recent-searches {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+}
+
+.cs-tap__recent-searches-delete-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* ==================== */
+/* Chips Style */
+/* ==================== */
+
+.cs-tap--chips {
+    padding: 4px 16px;
+    border-radius: 999px;
+    gap: 2px;
+}
+
+.cs-tap--chips-selected {
+    background: var(--neutral-10, #0B0E0F);
+}
+
+.cs-tap--chips:not(.cs-tap--chips-selected) {
+    background: var(--neutral-95, #ECEEF0);
+}
+
+/* Chips Labels */
+.cs-tap__label--chips-selected {
+    font-weight: 500;
+    line-height: 22px;
+    color: #ffffff;
+}
+
+.cs-tap__label--chips-default {
+    font-weight: 500;
+    line-height: 22px;
+    color: #6f7173;
+}
+
+/* ==================== */
+/* Underbar Style */
+/* ==================== */
+
+.cs-tap--underbar {
+    padding: 8px 12px;
+    gap: 2px;
+}
+
+.cs-tap--underbar-selected {
+    border-bottom: 1.5px solid var(--neutral-10, #0B0E0F);
+}
+
+/* Underbar Labels */
+.cs-tap__label--underbar-selected {
+    color: var(--neutral-10, #0B0E0F);
+
+    /* Body 2 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.2px;
+}
+
+.cs-tap--underbar-default {
+    border-bottom: 1.5px solid var(--neutral-97, #F6F8FA);
+}
+
+.cs-tap__label--underbar-default {
+    color: var(--neutral-70, #A1A3A5);
+    text-align: center;
+
+    /* Body 3 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: -0.2px;
+}
+
+/* ==================== */
+/* Badge */
+/* ==================== */
+
+.cs-tap__badge-icon {
+    width: 5.811px;
+    height: 7.07px;
+    object-fit: contain;
+}

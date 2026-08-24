@@ -1,0 +1,22 @@
+.text-button {
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 22px;
+	letter-spacing: -0.2px;
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.text-button--default {
+	color: #a1a3a5;
+}
+
+.text-button--underbar {
+	color: #0b0e0f;
+	text-align: center;
+	text-decoration: underline;
+	text-decoration-skip-ink: none;
+	text-underline-position: from-font;
+	cursor: pointer;
+}

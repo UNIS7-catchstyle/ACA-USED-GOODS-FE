@@ -1,0 +1,35 @@
+.post-detail_header {
+    display: flex;
+    height: 52px;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-detail_status-label {
+    flex-shrink: 0;
+    color: var(--system-error, #fa4549);
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    white-space: nowrap;
+}
+
+.post-detail_divider {
+    width: 375.447px;
+    height: 8px;
+    background: var(--Fill-Inactive, #ECEEF0);
+    margin: 28px 0;
+}
+
+.post-detail_textfield {
+    display: flex;
+    width: 374px;
+    padding: 12px 20px 24px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 34px;
+}

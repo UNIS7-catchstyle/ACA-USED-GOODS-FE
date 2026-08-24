@@ -1,0 +1,39 @@
+.policyagreepage {
+    padding: 0 20px;
+}
+
+.signup-header {
+    margin-bottom: 40px;
+}
+
+.signup-label {
+    color: var(--Text-Strong, #0B0E0F);
+
+    /* Headline */
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 145.455% */
+    margin-bottom: 28px;
+}
+
+.alltermbutton {
+    margin-bottom: 24px;
+}
+
+.termbutton_1 {
+    margin-bottom: 16px;
+}
+
+.termbutton_2 {
+    margin-bottom: 16px;
+}
+
+.termbutton_3 {
+    margin-bottom: 16px;
+}
+
+.termbutton_4 {
+    margin-bottom: 300px;
+}

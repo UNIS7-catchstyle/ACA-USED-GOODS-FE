@@ -1,0 +1,59 @@
+.term-button {
+	--term-label-default: #6f7173;
+	--term-label-selected: #3d3f41;
+	--term-arrow-default: #d0d1d3;
+	--term-arrow-selected: #7d8083;
+
+	width: 334px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+}
+
+.term-button__left {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 8px;
+}
+
+.term-button__check {
+	width: 18.2px;
+	height: 18.2px;
+	flex-shrink: 0;
+	display: block;
+}
+
+.term-button__label {
+	color: var(--term-label-default);
+	font-family: "Pretendard", sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 100%;
+	letter-spacing: -0.28px;
+	white-space: nowrap;
+}
+
+.term-button__arrow {
+	width: 8px;
+	height: 8px;
+	margin-right: 4px;
+	border-top: 1.5px solid var(--term-arrow-default);
+	border-right: 1.5px solid var(--term-arrow-default);
+	transform: rotate(45deg);
+	flex-shrink: 0;
+}
+
+.term-button--selected .term-button__label {
+	color: var(--term-label-selected);
+}
+
+.term-button--selected .term-button__arrow {
+	border-top-color: var(--term-arrow-selected);
+	border-right-color: var(--term-arrow-selected);
+}

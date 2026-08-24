@@ -1,0 +1,98 @@
+.setting-card-section {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+	width: 100%;
+}
+
+.setting-card {
+	align-items: center;
+	background: #ffffff;
+	border: 1px solid var(--line-subtle, #d3d5d7);
+	border-radius: 4px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	max-width: 335px;
+	min-height: 50px;
+	padding: 14px 20px;
+	width: 100%;
+}
+
+.setting-card__image-section {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	width: 100%;
+	max-width: 335px;
+	overflow-x: auto;
+}
+
+.setting-card__image-section::-webkit-scrollbar {
+	display: none;
+}
+
+.setting-card__label-section {
+	align-items: center;
+	column-gap: 2px;
+	display: inline-flex;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.setting-card__label,
+.setting-card__count {
+	color: var(--text-normal, #3d3f41);
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 22px;
+	letter-spacing: 0;
+	white-space: nowrap;
+}
+
+.setting-card__label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.setting-card__count {
+	flex-shrink: 0;
+}
+
+.setting-card__file-input {
+	display: none;
+}
+
+.setting-card__camera-button {
+	align-items: center;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	display: inline-flex;
+	height: 22px;
+	justify-content: center;
+	padding: 0;
+	width: 22px;
+}
+
+.setting-card__camera-button:focus,
+.setting-card__camera-button:focus-visible,
+.setting-card__camera-button:hover {
+	background: transparent;
+	border: none;
+	outline: none;
+}
+
+.setting-card__camera-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.45;
+}
+
+.setting-card__camera-icon {
+	display: block;
+	height: 22px;
+	width: 22px;
+}

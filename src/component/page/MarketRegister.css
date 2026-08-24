@@ -1,0 +1,67 @@
+.marketregister_cancel_modal {
+    transform: translateX(-30px);
+}
+
+.marketregister_header {
+    display: flex;
+    height: 52px;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.marketregister_header_title {
+    color: var(--Text-Strong, #0B0E0F);
+    /* Title 2 */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px; /* 144.444% */
+}
+
+.marketregister_container {
+    display: flex;
+    width: 375px;
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+}
+
+.marketregister_formsection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+}
+
+.marketregister_container_title {
+    align-self: stretch;
+    color: var(--Text-Strong, #0B0E0F);
+
+    /* Subtitle */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 137.5% */
+}
+
+.marketregister_tabsection {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    align-self: stretch;
+}
+
+.marketregister_buttonsection {
+    margin-top: 69px;
+    display: flex;
+    width: 375px;
+    padding: 0 20px 28px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+}

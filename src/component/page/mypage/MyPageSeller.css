@@ -1,0 +1,66 @@
+.mypageseller_gnb-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, 375px);
+}
+
+.mypageseller_topsection{
+    display: flex;
+    width: 375px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.mypageseller_header {
+    display: flex;
+    height: 44px;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.mypageseller_title{
+    color: var(--Text-Strong, #0B0E0F);
+
+    /* Title 2 */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px; /* 144.444% */
+}
+
+.mypageseller_tabsection {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+}
+
+.mypageseller_tabsection .cs-tap {
+    flex: 1 0 0;
+    min-width: 0;
+    height: 24px;
+}
+
+.mypageseller_container {
+    display: flex;
+    width: 375px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.mypageseller_empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 120px 20px;
+    text-align: center;
+}

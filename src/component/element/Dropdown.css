@@ -1,0 +1,27 @@
+.dropdown_button {
+    display: flex;
+    height: 32px;
+    padding: 8px 8px 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--Line-Assistive, #ECEEF0);
+}
+
+.dropdown_button:hover {
+    outline: none;
+    border: 1px solid var(--Line-Assistive, #ECEEF0);
+}
+
+.dropdown_label {
+    color: var(--Text-Subtle, #56585A);
+
+    /* Body 3 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: -0.2px;
+}

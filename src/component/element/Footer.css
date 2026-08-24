@@ -1,0 +1,90 @@
+.footer {
+	width: 100%;
+	background: var(--Fill-Inactive, #eceef0);
+	box-sizing: border-box;
+	padding: 36px 20px 35px 20px;
+}
+
+.footer__container {
+	width: 100%;
+	max-width: 335px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin: 0 auto;
+}
+
+.footer__header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.footer__logo {
+	width: 52.59px;
+	height: 14px;
+	display: block;
+	flex-shrink: 0;
+}
+
+.footer__socials {
+	display: flex;
+	align-items: center;
+	gap: 11.14px;
+}
+
+.footer__social-image-button {
+	display: block;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	line-height: 0;
+}
+
+.footer__donation {
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+}
+
+.footer__donation-title,
+.footer__donation-account,
+.footer__copyright {
+	margin: 0;
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	letter-spacing: -0.2px;
+	word-break: keep-all;
+}
+
+.footer__donation-title {
+	color: var(--Text-Strong, #0b0e0f);
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.footer__donation-account {
+	color: var(--Text-Subtle, #56585a);
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.footer__copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+	color: var(--Text-Assistive, #A1A3A5);
+
+    /* Caption 1 */
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.2px;
+}
