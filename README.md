@@ -36,7 +36,7 @@ For building and running the application you need :
 
 ```bash
 $ git clone https://github.com/UNIS7-catchstyle/ACA-FE
-$ cd ACA-FE
+$ cd ACA-USED-GOODS-FE
 ```
 
 ```bash
