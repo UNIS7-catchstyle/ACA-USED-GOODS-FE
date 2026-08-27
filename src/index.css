@@ -59,6 +59,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+@font-face {
+  font-family: "Pretendard";
+  src: url("/PretendardVariable.ttf");
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
