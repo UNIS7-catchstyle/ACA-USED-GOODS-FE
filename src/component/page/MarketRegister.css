@@ -38,6 +38,23 @@
     align-self: stretch;
 }
 
+.marketregister_error {
+    color: #F04452;
+    font-size: 13px;
+    padding: 0 20px;
+    margin-top: 12px;
+}
+
+.marketregister_message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    color: var(--Fill-Inactive, #ECEEF0);
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 16px;
+}
+
 .marketregister_container_title {
     align-self: stretch;
     color: var(--Text-Strong, #0B0E0F);

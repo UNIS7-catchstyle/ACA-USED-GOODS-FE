@@ -1,20 +1,14 @@
-let loggedIn = false;
-let userRole = null;
+import { getAccessToken } from '../api/client'
+import { logoutFromServer, withdrawFromServer } from '../api/auth'
 
 export function isLoggedIn() {
-    return loggedIn;
+    return Boolean(getAccessToken());
 }
 
-export function login(role) {
-    loggedIn = true;
-    userRole = role;
+export async function logout() {
+    return logoutFromServer();
 }
 
-export function getUserRole() {
-    return userRole;
-}
-
-export function logout() {
-    loggedIn = false;
-    userRole = null;
+export async function withdraw() {
+    return withdrawFromServer();
 }

@@ -29,6 +29,11 @@
 	cursor: pointer;
 }
 
+.image-uploader-preview__delete:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
 .image-uploader-preview__delete img {
 	display: block;
 	width: 20px;

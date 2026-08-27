@@ -9,11 +9,12 @@ export function getComments() {
     }
 }
 
-export function addComment(body) {
+export function addComment(body, imageUrl = "") {
     const comments = getComments();
     const nextComment = {
         id: Date.now(),
         body,
+        imageUrl,
         createdAt: new Date().toISOString(),
     };
 

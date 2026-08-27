@@ -211,7 +211,15 @@
 	font-weight: 500;
 	line-height: 18px;
 	letter-spacing: -0.2px;
-	white-space: nowrap;
+	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+.post-card__description--large {
+	display: block;
+	overflow: visible;
+	text-overflow: clip;
 }

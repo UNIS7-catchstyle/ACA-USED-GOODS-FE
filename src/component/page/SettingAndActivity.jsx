@@ -5,7 +5,7 @@ import TextButton from '../element/TextButton';
 import Modal from '../element/Modal';
 import Dummy from '../../assets/Dummy.png'
 import ArrowBack from '../../assets/arrow_back.svg'
-import { isLoggedIn, logout } from '../../utils/auth'
+import { isLoggedIn, logout, withdraw } from '../../utils/auth'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -17,15 +17,15 @@ function SettingAndActivity() {
     const [isWithdrawConfirmOpen, setIsWithdrawConfirmOpen] = useState(false)
     const [isWithdrawDoneOpen, setIsWithdrawDoneOpen] = useState(false)
 
-    const handleLogout = () => {
-        logout()
+    const handleLogout = async () => {
+        await logout()
         setLoggedIn(false)
         setIsLogoutConfirmOpen(false)
         setIsLogoutDoneOpen(true)
     }
 
-    const handleWithdraw = () => {
-        logout()
+    const handleWithdraw = async () => {
+        await withdraw()
         setLoggedIn(false)
         setIsWithdrawConfirmOpen(false)
         setIsWithdrawDoneOpen(true)

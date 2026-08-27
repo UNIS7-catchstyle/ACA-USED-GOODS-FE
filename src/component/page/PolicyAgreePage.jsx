@@ -1,19 +1,19 @@
 import Button from "../element/Button";
 import PolicyAgree from "../element/PolicyAgree";
 import CloseIcon from "../../assets/close.svg";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { agreeToTerms } from "../../api/terms";
 import "./PolicyAgreePage.css";
-import { login } from "../../utils/auth";
 
 function PolicyAgreePage() {
     const navigate = useNavigate();
-    const { state } = useLocation();
     const [allTermButtonState, setAllTermButtonState] = useState("Inactive");
     const [termButtonState1, setTermButtonState1] = useState("Selected");
     const [termButtonState2, setTermButtonState2] = useState("Selected");
     const [termButtonState3, setTermButtonState3] = useState("Selected");
     const [termButtonState4, setTermButtonState4] = useState("Selected");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const isRequiredTermsSelected =
         termButtonState1 === "Default" && termButtonState2 === "Default";
@@ -86,11 +86,22 @@ function PolicyAgreePage() {
             <Button
             className="button"
             label="동의하고 시작하기"
-            state={isRequiredTermsSelected ? "Default" : "Inactive"}
-            onClick={() => {
-                if (isRequiredTermsSelected) {
-                    login(state?.role);
+            state={isRequiredTermsSelected && !isSubmitting ? "Default" : "Inactive"}
+            onClick={async () => {
+                if (!isRequiredTermsSelected || isSubmitting) return;
+
+                setIsSubmitting(true);
+                try {
+                    await agreeToTerms({
+                        requiredAgreed: isRequiredTermsSelected,
+                        marketingEmailAgreed: termButtonState3 === "Default",
+                        marketingSnsAgreed: termButtonState4 === "Default",
+                    });
                     navigate('/');
+                } catch (error) {
+                    alert(error.message || "약관 동의 처리에 실패했습니다.");
+                } finally {
+                    setIsSubmitting(false);
                 }
             }}
         />

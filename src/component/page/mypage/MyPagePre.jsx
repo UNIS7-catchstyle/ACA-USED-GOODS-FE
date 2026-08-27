@@ -5,25 +5,44 @@ import Button from '../../element/Button'
 import DragHandle from '../../../assets/icon/DragHandle.svg'
 import TextField from '../../element/TextField'
 import { useNavigate } from 'react-router-dom'
-import { isLoggedIn, logout } from '../../../utils/auth'
-import { useState } from 'react'
+import { isLoggedIn } from '../../../utils/auth'
+import { useEffect, useState } from 'react'
+import { getMyInfo } from '../../../api/auth'
 
 function MyPagePre() {
     const navigate = useNavigate()
-    const [loggedIn, setLoggedIn] = useState(isLoggedIn)
+    const [loggedIn] = useState(isLoggedIn)
     const [selectedTab, setSelectedTab] = useState('written')
+    const [myInfo, setMyInfo] = useState(null)
 
-    const handleLogout = () => {
-        logout()
-        setLoggedIn(false)
-    }
+    useEffect(() => {
+        if (!loggedIn) return undefined
+
+        const controller = new AbortController()
+
+        getMyInfo()
+            .then((response) => {
+                const data = response.data
+                setMyInfo(data)
+                if (data?.hasMarket) {
+                    navigate('/mypage-seller', { replace: true })
+                }
+            })
+            .catch((error) => {
+                if (error.name !== 'AbortError') {
+                    setMyInfo(null)
+                }
+            })
+
+        return () => controller.abort()
+    }, [loggedIn, navigate])
 
     return (
         <div className="mypagepre">
             <div className="mypagepre_topsection">
                 <div className="mypagepre_header">
                     {loggedIn ? (
-                        <div className="mypagepre_title">닉네임</div>
+                        <div className="mypagepre_title">{myInfo?.nickname ?? '닉네임'}</div>
                     ) : (
                         <div className="mypagepre_title">마이페이지</div>
                     )}

@@ -6,6 +6,7 @@ function Comment({
 	className = "",
 	body = "댓글 내용입니다.댓글 내용입니다.댓글 내용입니다.댓글 내용입니다.댓글 내용입니다.",
 	showImage = false,
+	imageUrl,
 	style = "reply",
 	time = "7시",
 	userName = "닉네임",
@@ -31,9 +32,9 @@ function Comment({
 
 				<div className="comment-card__content">
 					<p className="comment-card__body">{body}</p>
-					{showImage && (
+					{(showImage || imageUrl) && (
 						<div className="comment-card__image-wrap">
-							<img src={DummyPhotoL} alt="댓글 첨부 이미지" className="comment-card__image" />
+							<img src={imageUrl || DummyPhotoL} alt="댓글 첨부 이미지" className="comment-card__image" />
 						</div>
 					)}
 				</div>

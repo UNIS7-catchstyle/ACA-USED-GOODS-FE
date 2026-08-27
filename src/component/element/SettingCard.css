@@ -33,6 +33,14 @@
 	display: none;
 }
 
+.setting-card__upload-error {
+	color: #d93025;
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	margin: 0;
+}
+
 .setting-card__label-section {
 	align-items: center;
 	column-gap: 2px;

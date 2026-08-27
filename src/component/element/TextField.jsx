@@ -13,6 +13,7 @@ function TextField({
 	defaultValue = "",
 	onChange,
 	onPhotoSelect,
+	photoDisabled = false,
 	showDeleteIcon = true,
 	showButton = false,
 	onButtonClick,
@@ -80,10 +81,11 @@ function TextField({
 							type="file"
 							accept="image/*"
 							className="textfield__file-input"
+							disabled={photoDisabled}
 							onChange={handlePhotoChange}
 							hidden
 						/>
-						<button type="button" className="textfield__icon textfield__icon--button" onClick={() => fileInputRef.current?.click()} aria-label="사진 첨부">
+						<button type="button" className="textfield__icon textfield__icon--button" onClick={() => fileInputRef.current?.click()} disabled={photoDisabled} aria-label="사진 첨부">
 							<img src={PhotoIcon} alt="" />
 						</button>
 					</>

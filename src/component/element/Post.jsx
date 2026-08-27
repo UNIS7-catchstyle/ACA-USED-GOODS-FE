@@ -6,6 +6,7 @@ import DummyPhotoL from "../../assets/Dummy_Photo_L.png";
 import Bookmark from "./Bookmark";
 
 function Post({
+	marketId,
 	style = "M",
 	showLabel = false,
 	marketName = "플리마켓 이름입니다.",
@@ -42,11 +43,11 @@ function Post({
 	return (
 		<article
 			className={`post-card ${isLargeStyle ? "post-card--large" : ""}`}
-			onClick={() => navigate("/post-detail", { state: { showLabel, isOwner } })}
+			onClick={() => navigate(`/post-detail/${marketId}`, { state: { showLabel, isOwner } })}
 			onKeyDown={(event) => {
 				if (event.key === "Enter" || event.key === " ") {
 					event.preventDefault();
-					navigate("/post-detail", { state: { showLabel, isOwner } });
+					navigate(`/post-detail/${marketId}`, { state: { showLabel, isOwner } });
 				}
 			}}
 			role="link"
@@ -83,16 +84,16 @@ function Post({
 							{shouldShowLabel && <span className="post-card__status-label">종료</span>}
 						</div>
 						<div className={`post-card__meta ${isLargeStyle ? "post-card__meta--large" : ""}`}>
-							<span className="post-card__meta-text">{artistName}</span>
-							<span className="post-card__divider">,</span>
-							<span className="post-card__meta-text">{location}</span>
+							{artistName && <span className="post-card__meta-text">{artistName}</span>}
+							{artistName && location && <span className="post-card__divider">,</span>}
+							{location && <span className="post-card__meta-text">{location}</span>}
 						</div>
 					</div>
 
-					<Bookmark count={bookmarkCount} initialBookmarked={initialBookmarked} />
+					<Bookmark marketId={marketId} count={bookmarkCount} initialBookmarked={initialBookmarked} />
 				</div>
 
-				<p className="post-card__description">{description}</p>
+				<p className={`post-card__description ${isLargeStyle ? "post-card__description--large" : ""}`}>{description}</p>
 			</div>
 		</article>
 	);

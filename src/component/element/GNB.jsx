@@ -8,7 +8,6 @@ import BookmarkDefault from "../../assets/GNB/BookmarkDefault.svg";
 import BookmarkSelected from "../../assets/GNB/BookmarkSelected.svg";
 import MyPageDefault from "../../assets/GNB/MyPageDefault.svg";
 import MyPageSelected from "../../assets/GNB/MyPageSelected.svg";
-import { getUserRole, isLoggedIn } from "../../utils/auth";
 
 const GNB_ITEMS = [
 	{
@@ -37,11 +36,7 @@ const GNB_ITEMS = [
 function GNB({ defaultSelected = "home", onChange }) {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const myPagePath = isLoggedIn()
-		? getUserRole() === "seller"
-			? "/mypage-seller"
-			: "/mypage-buyer"
-		: "/mypage-pre";
+	const myPagePath = "/mypage-pre";
 	const initialSelected = GNB_ITEMS.some((item) => item.key === defaultSelected)
 		? defaultSelected
 		: "home";

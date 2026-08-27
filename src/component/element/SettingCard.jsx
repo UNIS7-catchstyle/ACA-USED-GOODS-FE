@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./SettingCard.css";
 import cameraIcon from "../../assets/icon/Camera.svg";
 import ImageUploaderPreview from "./ImageUploaderPreview";
+import { uploadImages } from "../../api/client";
 
 function SettingCard({
 	className = "",
@@ -9,12 +10,17 @@ function SettingCard({
 	counting,
 	maxCount = 20,
 	accept = "image/*",
+	initialImages = [],
+	onRemoveInitialImage,
 	onFilesChange,
+	onUploadComplete,
 	disabled = false,
 }) {
 	const fileInputRef = useRef(null);
 	const [selectedFiles, setSelectedFiles] = useState([]);
 	const [previewUrls, setPreviewUrls] = useState([]);
+	const [isUploading, setIsUploading] = useState(false);
+	const [uploadError, setUploadError] = useState("");
 
 	// Keep object URLs in sync with selected files and revoke stale ones to avoid memory leaks.
 	useEffect(() => {
@@ -26,7 +32,7 @@ function SettingCard({
 		};
 	}, [selectedFiles]);
 
-	const currentCount = selectedFiles.length;
+	const currentCount = initialImages.length + selectedFiles.length;
 	const countingText = counting ?? `(${currentCount}/${maxCount})`;
 
 	const handleCameraClick = () => {
@@ -43,9 +49,28 @@ function SettingCard({
 			return;
 		}
 
-		const nextFiles = [...selectedFiles, ...files].slice(0, maxCount);
+		const previousFiles = selectedFiles;
+		const remainingSlots = maxCount - initialImages.length - previousFiles.length;
+		const filesToUpload = files.slice(0, Math.max(remainingSlots, 0));
+		if (filesToUpload.length === 0) {
+			event.target.value = "";
+			return;
+		}
+
+		const nextFiles = [...previousFiles, ...filesToUpload];
 		setSelectedFiles(nextFiles);
 		onFilesChange?.(nextFiles);
+		setUploadError("");
+		setIsUploading(true);
+
+		uploadImages(filesToUpload)
+			.then((urls) => onUploadComplete?.(urls))
+			.catch((error) => {
+				setSelectedFiles(previousFiles);
+				onFilesChange?.(previousFiles);
+				setUploadError(error.message || "이미지 업로드에 실패했습니다.");
+			})
+			.finally(() => setIsUploading(false));
 
 		// Allow selecting the same file again on the next pick.
 		event.target.value = "";
@@ -71,7 +96,7 @@ function SettingCard({
 					className="setting-card__file-input"
 					accept={accept}
 					multiple
-					disabled={disabled}
+					disabled={disabled || isUploading}
 					onChange={handleFileChange}
 				/>
 
@@ -86,17 +111,28 @@ function SettingCard({
 				</button>
 			</div>
 
-			{selectedFiles.length > 0 && (
+			{(initialImages.length > 0 || selectedFiles.length > 0) && (
 				<div className="setting-card__image-section">
+					{initialImages.map((url, index) => (
+						<ImageUploaderPreview
+							key={`initial-${url}-${index}`}
+							src={url}
+							onDelete={() => onRemoveInitialImage?.(index)}
+							disabled={isUploading}
+						/>
+					))}
 					{selectedFiles.map((file, index) => (
 						<ImageUploaderPreview
 							key={`${file.name}-${file.lastModified}-${index}`}
 							src={previewUrls[index]}
 							onDelete={() => handleRemoveFile(index)}
+							disabled={isUploading}
 						/>
 					))}
 				</div>
 			)}
+
+			{uploadError && <p className="setting-card__upload-error" role="alert">{uploadError}</p>}
 		</div>
 	);
 }

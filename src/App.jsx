@@ -21,7 +21,7 @@ function App() {
         <Route path="/policy-agree-page" element={<PolicyAgreePage />} />
         <Route path="/scrap" element={<Scrap />} />
         <Route path="/mypage-pre" element={<MyPagePre />} />
-        <Route path="/post-detail" element={<PostDetail />} />
+        <Route path="/post-detail/:id" element={<PostDetail />} />
         <Route path="/market-register" element={<MarketRegister />} />
         <Route path="/setting-and-activity" element={<SettingAndActivity />} />
         <Route path="/mypage-buyer" element={<MyPageBuyer />} />

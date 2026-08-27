@@ -64,3 +64,15 @@
     padding: 120px 20px;
     text-align: center;
 }
+
+.mypageseller_message {
+    color: var(--Text-Subtle, #56585A);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    padding: 12px 0;
+}
+
+.mypageseller_message--error {
+    color: var(--Text-Error, #E5484D);
+}

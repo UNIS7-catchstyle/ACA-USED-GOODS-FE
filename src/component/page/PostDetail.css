@@ -6,6 +6,16 @@
     align-items: center;
 }
 
+.post-detail_message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    color: var(--Fill-Inactive, #ECEEF0);
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 16px;
+}
+
 .post-detail_status-label {
     flex-shrink: 0;
     color: var(--system-error, #fa4549);
@@ -32,4 +42,29 @@
     align-items: flex-start;
     gap: 10px;
     margin-top: 34px;
+}
+
+.post-detail_reply-target {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 13px;
+    color: var(--Fill-Inactive, #7B7E85);
+}
+
+.post-detail_reply-target button {
+    border: none;
+    background: none;
+    color: var(--system-error, #fa4549);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.post-detail_image-error {
+    margin: 8px 0 0;
+    color: #d93025;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 13px;
+    line-height: 18px;
 }

@@ -61,4 +61,10 @@
     padding-bottom: 56px;
 }
 
+.login-error {
+    color: #d92d20;
+    margin: 0 24px 24px;
+    text-align: center;
+}
+
 

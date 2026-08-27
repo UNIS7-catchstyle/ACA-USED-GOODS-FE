@@ -72,6 +72,22 @@
     padding-bottom: 96px;
 }
 
+.scrap_message {
+    padding: 32px 20px;
+    color: var(--Text-Subtle, #56585A);
+    font-family: Pretendard;
+    font-size: 14px;
+}
+
+.scrap_message--error {
+    color: #D14343;
+}
+
+.scrap_load-more {
+    width: 100%;
+    height: 1px;
+}
+
 .scrap_guest_content {
     display: flex;
     flex-direction: column;

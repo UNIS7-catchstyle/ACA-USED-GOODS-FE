@@ -3,12 +3,21 @@
 > 덕질로 벌고 덕질로 쓰자
 >
 > 개발기간 : 2026.08
-> 
+>
 
 # 배포 주소
 
 > FE : 
-> 
+>
+
+## Backend connection
+
+Copy `.env.example` to `.env` when you need to override the backend URL. The
+frontend uses `VITE_API_BASE_URL`, which defaults to the production Railway
+server when it is not set.
+
+API requests should use `request` from `src/api/client.js` so authentication
+headers, JSON bodies, and API errors are handled consistently.
 
 # 개발자 정보
 
@@ -17,7 +26,7 @@
 > 이화여자대학교 컴퓨터공학과 24학번
 >
 > velog : https://velog.io/@daraetchi
-> 
+>
 
 ---
 
