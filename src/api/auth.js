@@ -11,7 +11,11 @@ export async function loginWithOAuth(provider, accessToken) {
     throw new Error(response.message || '로그인 응답에 인증 토큰이 없습니다.')
   }
 
-  setAuthTokens(authData)
+  // 약관 동의 전까지는 토큰을 저장하지 않아 로그인 상태로 취급되지 않도록 한다.
+  if (!authData.needsTermsAgreement) {
+    setAuthTokens(authData)
+  }
+
   return authData
 }
 

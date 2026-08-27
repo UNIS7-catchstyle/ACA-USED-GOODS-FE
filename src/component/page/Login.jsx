@@ -55,7 +55,9 @@ function Login() {
 
     const navigateAfterLogin = async (authData) => {
         if (authData.needsTermsAgreement) {
-            navigate("/policy-agree-page");
+            navigate("/policy-agree-page", {
+                state: { accessToken: authData.accessToken, refreshToken: authData.refreshToken },
+            });
             return;
         }
 

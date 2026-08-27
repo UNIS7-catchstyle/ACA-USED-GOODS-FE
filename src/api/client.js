@@ -17,8 +17,8 @@ export class ApiError extends Error {
 }
 
 async function sendRequest(path, options = {}) {
-  const { body, headers, ...fetchOptions } = options
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY)
+  const { body, headers, accessToken, ...fetchOptions } = options
+  const token = accessToken !== undefined ? accessToken : localStorage.getItem(ACCESS_TOKEN_KEY)
   const requestHeaders = new Headers(headers)
 
   if (body !== undefined && !(body instanceof FormData)) {
@@ -47,8 +47,8 @@ async function readResponse(response) {
 }
 
 export async function request(path, options = {}) {
-  const { skipTokenReissue = false, ...requestOptions } = options
-  let response = await sendRequest(path, requestOptions)
+  const { skipTokenReissue = false, accessToken, ...requestOptions } = options
+  let response = await sendRequest(path, accessToken !== undefined ? { ...requestOptions, accessToken } : requestOptions)
 
   if (response.status === 401 && !skipTokenReissue) {
     await reissueAuthTokens()

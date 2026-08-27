@@ -1,13 +1,24 @@
 import Button from "../element/Button";
 import PolicyAgree from "../element/PolicyAgree";
 import CloseIcon from "../../assets/close.svg";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { agreeToTerms } from "../../api/terms";
+import { setAuthTokens } from "../../api/client";
 import "./PolicyAgreePage.css";
 
 function PolicyAgreePage() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const pendingAuth = location.state;
+
+    useEffect(() => {
+        // 로그인 응답으로 전달받은 임시 토큰이 없으면(직접 접근 등) 로그인부터 다시 진행하도록 한다.
+        if (!pendingAuth?.accessToken) {
+            navigate("/login", { replace: true });
+        }
+    }, [pendingAuth, navigate]);
+
     const [allTermButtonState, setAllTermButtonState] = useState("Inactive");
     const [termButtonState1, setTermButtonState1] = useState("Selected");
     const [termButtonState2, setTermButtonState2] = useState("Selected");
@@ -96,7 +107,9 @@ function PolicyAgreePage() {
                         requiredAgreed: isRequiredTermsSelected,
                         marketingEmailAgreed: termButtonState3 === "Default",
                         marketingSnsAgreed: termButtonState4 === "Default",
+                        accessToken: pendingAuth?.accessToken,
                     });
+                    setAuthTokens(pendingAuth);
                     navigate('/');
                 } catch (error) {
                     alert(error.message || "약관 동의 처리에 실패했습니다.");
