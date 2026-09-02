@@ -58,7 +58,6 @@ function SettingAndActivity() {
                     <Modal
                         title="정말 로그아웃하시겠습니까?"
                         subtitle={<>로그아웃해도 마켓 정보는<br />안전하게 보관돼요.</>}
-                        contentClassName="logout-modal-content"
                         buttons={[
                             {
                                 label: "로그아웃",
@@ -81,7 +80,6 @@ function SettingAndActivity() {
                     <Modal
                         title="로그아웃되었습니다."
                         subtitle={null}
-                        contentClassName="logout-modal-content"
                         buttons={[
                             {
                                 label: "확인",
@@ -97,7 +95,6 @@ function SettingAndActivity() {
                     <Modal
                         title="정말 탈퇴하시겠습니까?"
                         subtitle={<>계정을 탈퇴하면 활동 기록과<br />마켓 데이터가 삭제돼요.</>}
-                        contentClassName="logout-modal-content"
                         buttons={[
                             {
                                 label: "탈퇴하기",
@@ -120,7 +117,6 @@ function SettingAndActivity() {
                     <Modal
                         title="탈퇴가 완료되었습니다."
                         subtitle={null}
-                        contentClassName="logout-modal-content"
                         buttons={[
                             {
                                 label: "확인",

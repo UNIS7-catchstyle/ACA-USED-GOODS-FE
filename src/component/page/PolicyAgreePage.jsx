@@ -94,6 +94,7 @@ function PolicyAgreePage() {
                 }
             }} />
            
+           <div className="button-section">
             <Button
             className="button"
             label="동의하고 시작하기"
@@ -118,8 +119,8 @@ function PolicyAgreePage() {
                 }
             }}
         />
-        
         </div>
+       </div>
     );
 }
 export default PolicyAgreePage;

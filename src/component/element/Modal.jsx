@@ -1,5 +1,6 @@
 import './Modal.css';
 import Button from './Button';
+import { useEffect, useState } from 'react';
 
 function Modal({
     onClose,
@@ -16,6 +17,15 @@ function Modal({
     buttonsClassName = "",
     children = null,
 }) {
+    const [overlayWidth, setOverlayWidth] = useState(() => document.documentElement.clientWidth);
+
+    useEffect(() => {
+        const updateOverlayWidth = () => setOverlayWidth(document.documentElement.clientWidth);
+
+        window.addEventListener('resize', updateOverlayWidth);
+        return () => window.removeEventListener('resize', updateOverlayWidth);
+    }, []);
+
     // 버튼 배열 제공되지 않으면 기존 호환성 유지
     const buttonsList = buttons || [{
         label: buttonLabel,
@@ -25,7 +35,7 @@ function Modal({
     }];
 
     return (
-        <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="find-password-modal-title">
+        <div className="modal-overlay" style={{ width: overlayWidth }} role="dialog" aria-modal="true" aria-labelledby="find-password-modal-title">
             <div className={["modal-content", contentClassName].join(" ").trim()}>
                 <div className={["modal-copy", copyClassName].join(" ").trim()}>
                     <div id="find-password-modal-title" className={["modal-title", titleClassName].join(" ").trim()}>{title}</div>

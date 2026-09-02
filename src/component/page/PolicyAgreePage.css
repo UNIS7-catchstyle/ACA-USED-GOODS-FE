@@ -4,6 +4,7 @@
 
 .signup-header {
     margin-bottom: 40px;
+    padding-top: 12px;
 }
 
 .signup-label {
@@ -35,5 +36,18 @@
 }
 
 .termbutton_4 {
-    margin-bottom: 300px;
+    margin-bottom: 96px;
+}
+
+.button-section {
+    background: #ffffff;
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    padding-bottom: 28px;
+    position: fixed;
+    right: 0;
+    z-index: 1;
 }

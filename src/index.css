@@ -28,6 +28,12 @@ body {
   min-height: 100vh;
 }
 
+@media (min-width: 768px) {
+  body {
+    background: #ffffff url("./assets/image 2.svg") center / cover fixed no-repeat;
+  }
+}
+
 #root {
   width: 100%;
   min-height: 100vh;
