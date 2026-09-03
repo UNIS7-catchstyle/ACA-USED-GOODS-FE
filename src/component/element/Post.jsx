@@ -1,5 +1,5 @@
 import "./Post.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DummyPhoto from "../../assets/Dummy_Photo.png";
 import DummyPhotoL from "../../assets/Dummy_Photo_L.png";
@@ -21,6 +21,8 @@ function Post({
 }) {
 	const navigate = useNavigate();
 	const [activeImageIndex, setActiveImageIndex] = useState(0);
+	const dragStateRef = useRef({ isDragging: false, startX: 0, startScrollLeft: 0, hasMoved: false });
+	const didDragRef = useRef(false);
 	const isLargeStyle = style === "L";
 	const shouldShowLabel = style === "M" && showLabel;
 
@@ -40,10 +42,63 @@ function Post({
 		setActiveImageIndex(Math.round(event.currentTarget.scrollLeft / slideWidth));
 	};
 
+	const handlePointerDown = (event) => {
+		if (event.pointerType !== "mouse") return;
+
+		dragStateRef.current = {
+			isDragging: true,
+			startX: event.clientX,
+			startScrollLeft: event.currentTarget.scrollLeft,
+			hasMoved: false,
+		};
+		event.currentTarget.setPointerCapture(event.pointerId);
+	};
+
+	const handlePointerMove = (event) => {
+		const dragState = dragStateRef.current;
+		if (!dragState.isDragging || event.pointerType !== "mouse") return;
+
+		const distance = event.clientX - dragState.startX;
+		if (Math.abs(distance) > 3) {
+			dragState.hasMoved = true;
+			didDragRef.current = true;
+			event.currentTarget.classList.add("post-card__image-row--dragging");
+		}
+		if (!dragState.hasMoved) return;
+
+		event.currentTarget.scrollLeft = dragState.startScrollLeft - distance;
+		event.preventDefault();
+	};
+
+	const handlePointerEnd = (event) => {
+		if (event.pointerType !== "mouse") return;
+
+		const { hasMoved } = dragStateRef.current;
+		dragStateRef.current.isDragging = false;
+		event.currentTarget.classList.remove("post-card__image-row--dragging");
+		if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+			event.currentTarget.releasePointerCapture(event.pointerId);
+		}
+		if (hasMoved) {
+			const nearestImagePosition = Math.round(event.currentTarget.scrollLeft / event.currentTarget.clientWidth)
+				* event.currentTarget.clientWidth;
+			event.currentTarget.scrollTo({ left: nearestImagePosition, behavior: "smooth" });
+		}
+	};
+
+	const handleCardClick = () => {
+		if (didDragRef.current) {
+			didDragRef.current = false;
+			return;
+		}
+
+		navigate(`/post-detail/${marketId}`, { state: { showLabel, isOwner } });
+	};
+
 	return (
 		<article
 			className={`post-card ${isLargeStyle ? "post-card--large" : ""}`}
-			onClick={() => navigate(`/post-detail/${marketId}`, { state: { showLabel, isOwner } })}
+			onClick={handleCardClick}
 			onKeyDown={(event) => {
 				if (event.key === "Enter" || event.key === " ") {
 					event.preventDefault();
@@ -56,6 +111,10 @@ function Post({
 			<div
 				className={`post-card__image-row ${isLargeStyle ? "post-card__image-row--large" : ""}`}
 				onScroll={isLargeStyle ? handleImageScroll : undefined}
+				onPointerDown={isLargeStyle ? handlePointerDown : undefined}
+				onPointerMove={isLargeStyle ? handlePointerMove : undefined}
+				onPointerUp={isLargeStyle ? handlePointerEnd : undefined}
+				onPointerCancel={isLargeStyle ? handlePointerEnd : undefined}
 				aria-label={isLargeStyle ? "게시물 이미지" : undefined}
 			>
 				{previewImages.map((imageSrc, index) => (

@@ -27,6 +27,7 @@
 	width: 100%;
 	overflow: hidden;
 	gap: 0;
+	cursor: grab;
 	scroll-snap-type: x mandatory;
 	overflow-x: auto;
 	overscroll-behavior-x: contain;
@@ -35,6 +36,11 @@
 
 .post-card__image-row--large::-webkit-scrollbar {
 	display: none;
+}
+
+.post-card__image-row--dragging {
+	cursor: grabbing;
+	scroll-snap-type: none;
 }
 
 .post-card__image {
