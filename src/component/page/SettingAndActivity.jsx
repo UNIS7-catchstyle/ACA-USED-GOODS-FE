@@ -41,7 +41,10 @@ function SettingAndActivity() {
                 </div>
                 <div className="setting-and-activity-content">
                     <SettingCardList />
-                    <SettingCardList label="아카 스텝에게 문의하기" />
+                    <SettingCardList
+                        label="아카 스텝에게 문의하기"
+                        onClick={() => window.open('https://open.kakao.com/o/s5Gt6TLi', '_blank', 'noopener,noreferrer')}
+                    />
                 </div>
             </div>
                 {loggedIn ? (
