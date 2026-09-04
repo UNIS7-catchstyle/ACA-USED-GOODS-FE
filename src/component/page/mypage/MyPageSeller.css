@@ -54,6 +54,8 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    padding-bottom: 96px;
+    box-sizing: border-box;
 }
 
 .mypageseller_empty-state {

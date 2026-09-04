@@ -263,7 +263,10 @@ function MarketRegister() {
                     <div className='marketregister_container_title'>자세한 설명을 입력해주세요</div>
                     <TextField
                         placeholder="게시글 본문에 들어갈 내용이에요.
-구매자들을 위해 품목 상태에 대해 자세히 적어주세요 :)"
+번호를 매겨 상세히 적어주시면 구매율이 높아져요!
+
+1. 응원봉 / 가격 / 응원봉에 대한 설명 
+2. 00앨범 포카 / 가격 / 앨범에 대한 설명"
                         multiline={true}
                         showDeleteIcon={true}
                         value={description}
