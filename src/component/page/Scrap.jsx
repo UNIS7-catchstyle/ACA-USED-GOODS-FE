@@ -136,7 +136,7 @@ function Scrap() {
                         )}
                         {errorMessage && <p className="scrap_message scrap_message--error">{errorMessage}</p>}
                         <div ref={loadMoreRef} className="scrap_load-more" aria-hidden="true" />
-                        {isLoading && <p className="scrap_message">불러오는 중...</p>}
+                        {isLoading && <p className="scrap_message">조금만 기다려 주세요...</p>}
                     </div>
                 </>
             ) : (

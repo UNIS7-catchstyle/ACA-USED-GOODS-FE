@@ -137,7 +137,7 @@ function MyPageSeller() {
             {selectedTab === 'written' ? (
                 <>
                     {myMarketLoading && !myMarket ? (
-                        <p className="mypageseller_message">불러오는 중...</p>
+                        <p className="mypageseller_message">조금만 기다려 주세요...</p>
                     ) : myMarketError ? (
                         <p className="mypageseller_message mypageseller_message--error">{myMarketError}</p>
                     ) : myMarket ? (

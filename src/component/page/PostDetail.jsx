@@ -171,6 +171,7 @@ function PostDetail() {
             </div>
             <Post
                 style="L"
+                showLabel={showLabel}
                 marketId={market.id}
                 marketName={market.title}
                 artistName={market.itemCategories || market.category}

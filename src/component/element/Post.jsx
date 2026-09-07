@@ -97,7 +97,7 @@ function Post({
 
 	return (
 		<article
-			className={`post-card ${isLargeStyle ? "post-card--large" : ""}`}
+			className={`post-card ${isLargeStyle ? "post-card--large" : ""} ${showLabel ? "post-card--closed" : ""}`}
 			onClick={handleCardClick}
 			onKeyDown={(event) => {
 				if (event.key === "Enter" || event.key === " ") {
