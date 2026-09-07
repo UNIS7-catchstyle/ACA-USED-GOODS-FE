@@ -36,12 +36,19 @@
 
 .post-detail_textfield {
     display: flex;
-    width: 374px;
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 375px;
     padding: 12px 20px 24px 20px;
+    box-sizing: border-box;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    margin-top: 34px;
+    background: #ffffff;
+    transform: translateX(-50%);
 }
 
 .post-detail_reply-target {
