@@ -81,7 +81,10 @@ function Home() {
         return () => observer.disconnect();
     }, [hasNext, isLoading, nextCursor, selectedTabIndex, hideClosed]);
 
-    const isEmpty = !isLoading && !errorMessage && markets.length === 0;
+    // Category has no markets at all: show the full empty-state screen.
+    const isEmpty = !isLoading && !errorMessage && markets.length === 0 && !hideClosed;
+    // Filter (종료 제외) excluded every market: keep the headline/dropdown visible so it can be toggled back.
+    const isFilteredEmpty = !isLoading && !errorMessage && markets.length === 0 && hideClosed;
 
     return (
         <div className={`home ${isEmpty ? "home--empty-state" : ""}`}>
@@ -118,26 +121,37 @@ function Home() {
                         <div className="home_total">총 {totalCount}개</div>
                         <Dropdown onChange={setHideClosed} />
                     </div>
-                    <div className="home_feed" aria-live="polite">
-                        {markets.map((market) => (
-                            <Post
-                                key={market.id}
-                                marketId={market.id}
-                                showLabel={Boolean(market.isClosed)}
-                                hideClosed={hideClosed}
-                                marketName={market.title}
-                                artistName={market.itemCategories || market.category}
-                                location=""
-                                description={market.description}
-                                bookmarkCount={market.scrapCount}
-                                initialBookmarked={market.isScrapped}
-                                images={market.thumbnails}
-                            />
-                        ))}
-                        {errorMessage && <p className="home_message home_message--error">{errorMessage}</p>}
-                        <div ref={loadMoreRef} className="home_load-more" aria-hidden="true" />
-                        {isLoading && <p className="home_message">조금만 기다려 주세요...</p>}
-                    </div>
+                    {isFilteredEmpty ? (
+                        <div className="home_empty-state">
+                            <p className="home_empty-title">
+                                아직 등록된 마켓이 없어요.
+                            </p>
+                            <p className="home_empty-description">
+                                다른 카테고리의 마켓들을 둘러보세요!
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="home_feed" aria-live="polite">
+                            {markets.map((market) => (
+                                <Post
+                                    key={market.id}
+                                    marketId={market.id}
+                                    showLabel={Boolean(market.isClosed)}
+                                    hideClosed={hideClosed}
+                                    marketName={market.title}
+                                    artistName={market.itemCategories || market.category}
+                                    location=""
+                                    description={market.description}
+                                    bookmarkCount={market.scrapCount}
+                                    initialBookmarked={market.isScrapped}
+                                    images={market.thumbnails}
+                                />
+                            ))}
+                            {errorMessage && <p className="home_message home_message--error">{errorMessage}</p>}
+                            <div ref={loadMoreRef} className="home_load-more" aria-hidden="true" />
+                            {isLoading && <p className="home_message">조금만 기다려 주세요...</p>}
+                        </div>
+                    )}
                 </>
             )}
 
