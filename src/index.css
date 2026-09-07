@@ -30,7 +30,7 @@ body {
 
 @media (min-width: 768px) {
   body {
-    background: #ffffff url("./assets/image 2.svg") center / cover fixed no-repeat;
+    background: rgba(0, 0, 0, 1);
   }
 }
 
