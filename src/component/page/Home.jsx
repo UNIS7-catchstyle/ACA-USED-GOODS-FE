@@ -136,7 +136,7 @@ function Home() {
                         ))}
                         {errorMessage && <p className="home_message home_message--error">{errorMessage}</p>}
                         <div ref={loadMoreRef} className="home_load-more" aria-hidden="true" />
-                        {isLoading && <p className="home_message">불러오는 중...</p>}
+                        {isLoading && <p className="home_message">조금만 기다려 주세요...</p>}
                     </div>
                 </>
             )}
