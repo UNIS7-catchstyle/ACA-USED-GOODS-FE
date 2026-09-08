@@ -142,6 +142,13 @@ function MyPageSeller() {
                         <p className="mypageseller_message mypageseller_message--error">{myMarketError}</p>
                     ) : myMarket ? (
                         <div className="mypageseller_container">
+                            <Button
+                                label="게시글 추가하기"
+                                state="default"
+                                style="primary"
+                                size="M"
+                                onClick={() => navigate('/market-register', { state: { mode: 'create' } })}
+                            />
                             <Post
                                 style="L"
                                 marketId={myMarket.id}
