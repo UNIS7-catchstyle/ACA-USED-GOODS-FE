@@ -172,8 +172,6 @@ function MarketRegister() {
         } catch (error) {
             if (error.status === 403) {
                 alert(isEditMode ? "작성자만 수정할 수 있습니다." : "마켓 등록 기간이 마감되었습니다.");
-            } else if (error.status === 409) {
-                alert("이미 등록한 마켓이 있습니다.");
             } else {
                 setErrorMessage(error.message || (isEditMode ? "마켓 수정에 실패했습니다." : "마켓 등록에 실패했습니다."));
             }
@@ -190,7 +188,7 @@ function MarketRegister() {
         <div className="marketregister">
             <div className="marketregister_header">
                 <img className="marketregister_close" src={CloseIcon} alt="닫기" onClick={() => setIsCancelModalOpen(true)} />
-                <div className="marketregister_header_title">{isEditMode ? "수정하기" : "마켓 등록하기"}</div>
+                <div className="marketregister_header_title">{isEditMode ? "수정하기" : "게시글 등록하기"}</div>
                 {isEditMode ? (
                     <Dropdown label="마켓 종료" checked={isClosed} onChange={handleToggleClosed} disabled={isClosing} />
                 ) : (
@@ -228,7 +226,7 @@ function MarketRegister() {
                     onUploadComplete={handleUploadComplete}
                 />
                 <div className="marketregister_formsection">
-                    <div className='marketregister_container_title'>등록하려는 마켓의 카테고리를 선택해주세요</div>
+                    <div className='marketregister_container_title'>등록하려는 게시글의 카테고리를 선택해주세요</div>
                     <div className='marketregister_tabsection'>
                         {tabs.map((tabLabel, index) => (
                         <Tab

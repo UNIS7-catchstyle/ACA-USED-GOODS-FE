@@ -8,7 +8,7 @@ import Post from '../../element/Post'
 import Button from '../../element/Button'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
-import { getCommentedMarkets, getMyMarket } from '../../../api/markets'
+import { getCommentedMarkets, getMyMarkets } from '../../../api/markets'
 import { getMyInfo } from '../../../api/auth'
 
 const PAGE_SIZE = 20;
@@ -24,9 +24,12 @@ function MyPageSeller() {
     const [errorMessage, setErrorMessage] = useState('')
     const [hideClosed, setHideClosed] = useState(false)
     const loadMoreRef = useRef(null)
-    const [myMarket, setMyMarket] = useState(null)
-    const [myMarketLoading, setMyMarketLoading] = useState(false)
-    const [myMarketError, setMyMarketError] = useState('')
+    const [myMarkets, setMyMarkets] = useState([])
+    const [myMarketsNextCursor, setMyMarketsNextCursor] = useState(null)
+    const [myMarketsHasNext, setMyMarketsHasNext] = useState(false)
+    const [myMarketsLoading, setMyMarketsLoading] = useState(false)
+    const [myMarketsError, setMyMarketsError] = useState('')
+    const myMarketsLoadMoreRef = useRef(null)
 
     useEffect(() => {
         getMyInfo()
@@ -38,21 +41,51 @@ function MyPageSeller() {
         if (selectedTab !== 'written') return undefined;
 
         const controller = new AbortController();
-        setMyMarketLoading(true);
-        setMyMarketError('');
+        setMyMarkets([]);
+        setMyMarketsNextCursor(null);
+        setMyMarketsHasNext(false);
+        setMyMarketsError('');
+        setMyMarketsLoading(true);
 
-        getMyMarket({ signal: controller.signal })
-            .then((response) => setMyMarket(response.data ?? null))
+        getMyMarkets({ size: PAGE_SIZE, signal: controller.signal })
+            .then((response) => {
+                const data = response.data ?? {};
+                setMyMarkets(data.items ?? []);
+                setMyMarketsNextCursor(data.nextCursor ?? null);
+                setMyMarketsHasNext(Boolean(data.hasNext));
+            })
             .catch((error) => {
                 if (error.name !== 'AbortError') {
-                    setMyMarket(null);
-                    setMyMarketError(error.message || '등록한 마켓을 불러오지 못했어요.');
+                    setMyMarketsError(error.message || '등록한 마켓을 불러오지 못했어요.');
                 }
             })
-            .finally(() => setMyMarketLoading(false));
+            .finally(() => setMyMarketsLoading(false));
 
         return () => controller.abort();
     }, [selectedTab]);
+
+    useEffect(() => {
+        if (selectedTab !== 'written' || !myMarketsHasNext || myMarketsLoading || !myMarketsNextCursor || !myMarketsLoadMoreRef.current) return undefined;
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+
+            setMyMarketsLoading(true);
+            getMyMarkets({ cursor: myMarketsNextCursor, size: PAGE_SIZE })
+                .then((response) => {
+                    const data = response.data ?? {};
+                    setMyMarkets((currentMarkets) => [...currentMarkets, ...(data.items ?? [])]);
+                    setMyMarketsNextCursor(data.nextCursor ?? null);
+                    setMyMarketsHasNext(Boolean(data.hasNext));
+                })
+                .catch((error) => setMyMarketsError(error.message || '등록한 마켓을 더 불러오지 못했어요.'))
+                .finally(() => setMyMarketsLoading(false));
+        });
+
+        observer.observe(myMarketsLoadMoreRef.current);
+        return () => observer.disconnect();
+    }, [selectedTab, myMarketsHasNext, myMarketsLoading, myMarketsNextCursor]);
+
 
     useEffect(() => {
         if (selectedTab !== 'commented') return undefined;
@@ -136,48 +169,58 @@ function MyPageSeller() {
             </div>
             {selectedTab === 'written' ? (
                 <>
-                    {myMarketLoading && !myMarket ? (
-                        <p className="mypageseller_message">조금만 기다려 주세요...</p>
-                    ) : myMarketError ? (
-                        <p className="mypageseller_message mypageseller_message--error">{myMarketError}</p>
-                    ) : myMarket ? (
-                        <div className="mypageseller_container">
-                            <Button
-                                label="게시글 추가하기"
-                                state="default"
-                                style="primary"
-                                size="M"
-                                onClick={() => navigate('/market-register', { state: { mode: 'create' } })}
-                            />
-                            <Post
-                                style="L"
-                                marketId={myMarket.id}
-                                showLabel={Boolean(myMarket.isClosed)}
-                                marketName={myMarket.title}
-                                artistName={myMarket.itemCategories || myMarket.category}
-                                location=""
-                                description={myMarket.description}
-                                bookmarkCount={myMarket.scrapCount}
-                                initialBookmarked={myMarket.isScrapped}
-                                images={myMarket.thumbnails}
-                                isOwner
-                            />
-                            <Button
-                                label="수정하기"
-                                state="default"
-                                style="secondary"
-                                size="M"
-                                onClick={() => navigate('/market-register', { state: { mode: 'edit', marketId: myMarket.id } })}
-                            />
-                        </div>
-                    ) : (
-                        <div className="mypageseller_empty-state">
-                            <strong>아직 등록된 마켓이 없어요</strong>
-                            <span>지금 바로 마켓을 <br />등록해 보세요!</span>
-                        </div>
-                    )}
+                    <div className="mypageseller_container">
+                        <Button
+                            label="게시글 추가하기"
+                            state="default"
+                            style="primary"
+                            size="M"
+                            onClick={() => navigate('/market-register', { state: { mode: 'create' } })}
+                        />
+                        {myMarketsLoading && myMarkets.length === 0 ? (
+                            <p className="mypageseller_message">조금만 기다려 주세요...</p>
+                        ) : myMarketsError ? (
+                            <p className="mypageseller_message mypageseller_message--error">{myMarketsError}</p>
+                        ) : myMarkets.length === 0 ? (
+                            <div className="mypageseller_empty-state">
+                                <strong>아직 등록된 마켓이 없어요</strong>
+                                <span>지금 바로 마켓을 <br />등록해 보세요!</span>
+                            </div>
+                        ) : (
+                            <>
+                                {myMarkets.map((market) => (
+                                    <div key={market.id} className="mypageseller_written-item">
+                                        <Post
+                                            style="L"
+                                            marketId={market.id}
+                                            showLabel={Boolean(market.isClosed)}
+                                            marketName={market.title}
+                                            artistName={market.itemCategories || market.category}
+                                            location=""
+                                            description={market.description}
+                                            bookmarkCount={market.scrapCount}
+                                            initialBookmarked={market.isScrapped}
+                                            images={market.thumbnails}
+                                            isOwner
+                                        />
+                                        <Button
+                                            label="수정하기"
+                                            state="default"
+                                            style="secondary"
+                                            size="M"
+                                            onClick={() => navigate('/market-register', { state: { mode: 'edit', marketId: market.id } })}
+                                        />
+                                    </div>
+                                ))}
+                                {myMarketsError && <p className="mypageseller_message mypageseller_message--error">{myMarketsError}</p>}
+                                <div ref={myMarketsLoadMoreRef} className="mypageseller_load-more" aria-hidden="true" />
+                                {myMarketsLoading && <p className="mypageseller_message">불러오는 중...</p>}
+                            </>
+                        )}
+                    </div>
                 </>
             ) : (
+
                 <>
                     {!isLoading && !errorMessage && markets.length === 0 ? (
                         <div className="mypageseller_empty-state">

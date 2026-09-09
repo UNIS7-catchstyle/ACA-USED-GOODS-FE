@@ -65,8 +65,14 @@ export async function unscrapMarket(marketId) {
   })
 }
 
-export async function getMyMarket({ signal } = {}) {
-  return request('/api/users/me/markets', { signal })
+export async function getMyMarkets({ cursor, size = 20, signal } = {}) {
+  const params = new URLSearchParams({
+    size: String(size),
+  })
+
+  if (cursor) params.set('cursor', cursor)
+
+  return request(`/api/users/me/markets?${params.toString()}`, { signal })
 }
 
 export async function getMarketRegistrationStatus({ signal } = {}) {

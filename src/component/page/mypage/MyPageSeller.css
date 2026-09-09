@@ -67,6 +67,14 @@
     text-align: center;
 }
 
+.mypageseller_written-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
 .mypageseller_message {
     color: var(--Text-Subtle, #56585A);
     text-align: center;
