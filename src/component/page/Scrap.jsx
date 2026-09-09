@@ -94,7 +94,7 @@ function Scrap() {
                 <div className="scrap_header">
                     <div className="scrap_title">스크랩</div>
                 </div>
-                {loggedIn && (
+                {loggedIn && !(markets.length === 0 && !isLoading && !errorMessage && !hideClosed) && (
                 <div className="scrap_tabsection">
                     {tabs.map((tabLabel, index) => (
                     <Tab
@@ -111,10 +111,12 @@ function Scrap() {
             
             {loggedIn ? (
                 <>
-                    <div className="scrap_headline">
-                        <div className="scrap_total">총 {totalCount}개</div>
-                        <Dropdown onChange={setHideClosed} />
-                    </div>
+                    {!(markets.length === 0 && !isLoading && !errorMessage && !hideClosed) && (
+                        <div className="scrap_headline">
+                            <div className="scrap_total">총 {totalCount}개</div>
+                            <Dropdown onChange={setHideClosed} />
+                        </div>
+                    )}
                     <div className="scrap_feed" aria-live="polite">
                         {markets.map((market) => (
                             <Post
@@ -132,7 +134,10 @@ function Scrap() {
                             />
                         ))}
                         {!isLoading && !errorMessage && markets.length === 0 && (
-                            <p className="scrap_message">스크랩한 마켓이 없어요.</p>
+                            <div className="scrap_empty-state">
+                                <strong>아직 스크랩한 마켓이 없어요</strong>
+                                <span>지금 바로<br />마켓을 둘러보세요!</span>
+                            </div>
                         )}
                         {errorMessage && <p className="scrap_message scrap_message--error">{errorMessage}</p>}
                         <div ref={loadMoreRef} className="scrap_load-more" aria-hidden="true" />
