@@ -15,7 +15,7 @@
 	box-sizing: border-box;
 	padding: 14px 20px;
 	border-radius: 4px;
-	border: none;
+	border: 1px solid transparent;
 }
 
 .textfield__box--filled {
@@ -23,12 +23,13 @@
 }
 
 .textfield__box--outline {
-	border: 1px solid var(--line-strong, #56585a);
+	border-color: var(--line-strong, #56585a);
 }
 
 .textfield__box--comment {
 	gap: 10px;
-	border: 1px solid var(--line-subtle, #d3d5d7);
+	height: 50px;
+	border-color: var(--line-subtle, #d3d5d7);
 }
 
 .textfield__input {

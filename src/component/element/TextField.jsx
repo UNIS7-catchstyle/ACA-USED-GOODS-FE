@@ -74,7 +74,7 @@ function TextField({
 					/>
 				)}
 
-				{isComment && (
+				{isComment && !isFocused && (
 					<>
 						<input
 							ref={fileInputRef}
